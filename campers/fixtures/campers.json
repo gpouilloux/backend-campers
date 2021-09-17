@@ -1,0 +1,26 @@
+[
+  {
+    "model": "campers.camper",
+    "pk": 1,
+    "fields": {
+      "latitude": 44.8637834,
+      "longitude": -0.6211603
+    }
+  },
+  {
+    "model": "campers.camper",
+    "pk": 2,
+    "fields": {
+      "latitude": 44.8313035,
+      "longitude": -0.7169664
+    }
+  },
+  {
+    "model": "campers.camper",
+    "pk": 3,
+    "fields": {
+      "latitude": 38.7436883,
+      "longitude": -9.1952226
+    }
+  }
+]
