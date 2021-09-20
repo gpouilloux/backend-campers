@@ -22,11 +22,11 @@ from rest_framework import routers
 from campers.views import CamperViewSet
 
 router = routers.DefaultRouter()
-router.register(r'campers', CamperViewSet)
+router.register(r"campers", CamperViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    path('api/', include(router.urls)),
-    path('admin/', admin.site.urls),
+    path("api/", include(router.urls)),
+    path("admin/", admin.site.urls),
 ]

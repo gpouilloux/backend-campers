@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class CampersConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'campers'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "campers"

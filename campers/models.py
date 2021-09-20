@@ -1,20 +1,21 @@
 from decimal import Decimal
 from datetime import date
+from typing import Optional
 
 from django.db import models
 
-from django.db.models import FloatField, DecimalField
+from django.db.models import FloatField, DecimalField, QuerySet
 
 SEARCH_COORDINATES_PADDING = 0.1
 
 
 class CamperManager(models.Manager):
-    def within_coordinates(self, latitude, longitude):
+    def within_coordinates(self, latitude: float, longitude: float) -> QuerySet:
         return self.filter(
             latitude__gt=latitude - SEARCH_COORDINATES_PADDING,
             latitude__lt=latitude + SEARCH_COORDINATES_PADDING,
             longitude__gt=longitude - SEARCH_COORDINATES_PADDING,
-            longitude__lt=longitude + SEARCH_COORDINATES_PADDING
+            longitude__lt=longitude + SEARCH_COORDINATES_PADDING,
         )
 
 
@@ -26,7 +27,12 @@ class Camper(models.Model):
     objects = CamperManager()
 
     @staticmethod
-    def get_price(price_per_day, weekly_discount, start_date: date, end_date: date) -> Decimal:
+    def get_price(
+        price_per_day: Decimal,
+        weekly_discount: Decimal,
+        start_date: Optional[date],
+        end_date: Optional[date],
+    ) -> Decimal:
         """
         Calculate the price of a camper rental.
         If no dates are provided, the price is the `price_per_day`.

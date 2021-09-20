@@ -24,24 +24,22 @@ def load_search_requests():
 
 
 class TestCampersViews(TestCase):
-    fixtures = ['campers.json']
+    fixtures = ["campers.json"]
 
     def test_search_with_results(self):
-        url = reverse('camper-search')
+        url = reverse("camper-search")
         search_requests = load_search_requests()
         search_results = load_search_results()
         for search_request in search_requests:
             search_id = str(search_request["id"])
-            response = self.client.get(
-                url, data=search_request, format="json"
-            )
+            response = self.client.get(url, data=search_request, format="json")
             self.assertEqual(response.status_code, status.HTTP_200_OK)
             response_campers = response.data
             expected_campers = search_results[search_id]
             self.assertListEqual(response_campers, expected_campers)
 
     def test_search_no_result(self):
-        url = reverse('camper-search')
+        url = reverse("camper-search")
 
         response = self.client.get(
             url, data={"latitude": 25.0000188, "longitude": -71.0087548}, format="json"

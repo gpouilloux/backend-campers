@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('campers', '0001_initial'),
+        ("campers", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='camper',
-            name='price_per_day',
+            model_name="camper",
+            name="price_per_day",
             field=models.DecimalField(decimal_places=2, max_digits=10, null=True),
         ),
         migrations.AddField(
-            model_name='camper',
-            name='weekly_discount',
+            model_name="camper",
+            name="weekly_discount",
             field=models.DecimalField(decimal_places=2, max_digits=5, null=True),
         ),
     ]
