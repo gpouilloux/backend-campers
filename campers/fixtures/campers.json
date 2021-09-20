@@ -4,7 +4,9 @@
     "pk": 1,
     "fields": {
       "latitude": 44.8637834,
-      "longitude": -0.6211603
+      "longitude": -0.6211603,
+      "price_per_day": 90.00,
+      "weekly_discount": 0.10
     }
   },
   {
@@ -12,7 +14,8 @@
     "pk": 2,
     "fields": {
       "latitude": 44.8313035,
-      "longitude": -0.7169664
+      "longitude": -0.7169664,
+      "price_per_day": 75.00
     }
   },
   {
@@ -20,7 +23,9 @@
     "pk": 3,
     "fields": {
       "latitude": 38.7436883,
-      "longitude": -9.1952226
+      "longitude": -9.1952226,
+      "price_per_day": 85.50,
+      "weekly_discount": 0.25
     }
   }
 ]
