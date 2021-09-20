@@ -4,12 +4,12 @@ from typing import Optional
 
 from django.db import models
 
-from django.db.models import FloatField, DecimalField, QuerySet
+from django.db.models import FloatField, DecimalField, QuerySet, BooleanField, DateField
 
 SEARCH_COORDINATES_PADDING = 0.1
 
 
-class CamperManager(models.Manager):
+class CamperQuerySet(models.QuerySet):
     def within_coordinates(self, latitude: float, longitude: float) -> QuerySet:
         return self.filter(
             latitude__gt=latitude - SEARCH_COORDINATES_PADDING,
@@ -18,13 +18,24 @@ class CamperManager(models.Manager):
             longitude__lt=longitude + SEARCH_COORDINATES_PADDING,
         )
 
+    def available_within_dates(
+        self, start_date: Optional[date], end_date: Optional[date]
+    ) -> QuerySet:
+        if start_date or end_date:
+            return self.exclude(
+                campercalendar__start_date__lte=end_date,
+                campercalendar__end_date__gte=start_date,
+                campercalendar__is_available=False,
+            )
+        return self
+
 
 class Camper(models.Model):
     latitude = FloatField()
     longitude = FloatField()
     price_per_day = DecimalField(max_digits=10, decimal_places=2, null=True)
     weekly_discount = DecimalField(max_digits=5, decimal_places=2, null=True)
-    objects = CamperManager()
+    objects = CamperQuerySet.as_manager()
 
     @staticmethod
     def get_price(
@@ -52,3 +63,10 @@ class Camper(models.Model):
             )
             return (price_per_day * number_days) * (1 - weekly_discount)
         return price_per_day
+
+
+class CamperCalendar(models.Model):
+    camper = models.ForeignKey(Camper, on_delete=models.CASCADE)
+    is_available = BooleanField(default=False)
+    start_date = DateField()
+    end_date = DateField()

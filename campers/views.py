@@ -45,7 +45,11 @@ class CamperViewSet(viewsets.ReadOnlyModelViewSet):
         end_date_qp = request.query_params.get("end_date")
         start_date = date.fromisoformat(start_date_qp) if start_date_qp else None
         end_date = date.fromisoformat(end_date_qp) if end_date_qp else None
-        campers = Camper.objects.within_coordinates(latitude, longitude).values()
+        campers = (
+            Camper.objects.within_coordinates(latitude, longitude)
+            .available_within_dates(start_date, end_date)
+            .values()
+        )
         for camper in campers:
             camper["price"] = Camper.get_price(
                 camper["price_per_day"], camper["weekly_discount"], start_date, end_date

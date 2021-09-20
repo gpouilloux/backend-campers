@@ -24,7 +24,7 @@ def load_search_requests():
 
 
 class TestCampersViews(TestCase):
-    fixtures = ["campers.json"]
+    fixtures = ["campers.json", "camper_calendars.json"]
 
     def test_search_with_results(self):
         url = reverse("camper-search")
