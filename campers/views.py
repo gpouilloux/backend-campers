@@ -25,6 +25,11 @@ class CamperViewSet(viewsets.ReadOnlyModelViewSet):
 
     @action(detail=False)
     def search(self, request: Request) -> Response:
+        """
+        Search campers based on their location and availabilities
+        :param request: a HTTP request to search campers
+        :return: a list of campers resulting from the search
+        """
         if (
             "latitude" not in request.query_params
             or "longitude" not in request.query_params

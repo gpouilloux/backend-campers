@@ -11,6 +11,12 @@ SEARCH_COORDINATES_PADDING = 0.1
 
 class CamperQuerySet(models.QuerySet):
     def within_coordinates(self, latitude: float, longitude: float) -> QuerySet:
+        """
+        Returns campers located within the given coordinates
+        :param latitude: a latitude coordinate
+        :param longitude: a longitude coordinate
+        :return: a list of campers located in the given coordinates
+        """
         return self.filter(
             latitude__gt=latitude - SEARCH_COORDINATES_PADDING,
             latitude__lt=latitude + SEARCH_COORDINATES_PADDING,
@@ -21,6 +27,12 @@ class CamperQuerySet(models.QuerySet):
     def available_within_dates(
         self, start_date: Optional[date], end_date: Optional[date]
     ) -> QuerySet:
+        """
+        Returns campers available in the specified date range
+        :param start_date: a start date
+        :param end_date: a end date
+        :return: a list of campers available during the specified dates
+        """
         if start_date or end_date:
             return self.exclude(
                 campercalendar__start_date__lte=end_date,
