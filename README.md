@@ -3,6 +3,29 @@ This test is part of our hiring process at Yescapa for backend positions.
 
 **Looking for a job? Contact us at jobs@yescapa.com**
 
+## Get started
+
+Create a Python 3.8 virtualenv
+`python3.8 -m venv ./virtualenv`
+
+Install dependencies
+```
+source ./virtualenv/bin/activate`
+pip install -r requirements.txt
+```
+
+Migrate the database
+`python manage.py migrate`
+
+Run the server
+`python manage.py runserver`
+
+Optionally:
+
+- Run lint & format `black . ; flake8 backendcampers`
+- Run type checker `mypy .`
+- Run tests `coverage run manage.py test -v 2`
+
 ## Challenge
 During this challenge, you will create a search engine to find the best campers to rent for your next roadtrip.
 Across the 3 levels, the difficulty is raising and the engine can handle more precise searches.

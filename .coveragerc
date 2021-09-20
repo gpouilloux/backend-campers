@@ -1,0 +1,8 @@
+[run]
+branch = True
+omit =
+    */site-packages/*
+    */dist-packages/*
+
+[xml]
+output = coverage.xml
